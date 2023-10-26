@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { lottoData } from '../data/data';
 import styled from 'styled-components';
-import { BsCircleFill } from 'react-icons/bs'; 
-
+import { BsCircleFill } from 'react-icons/bs';
 
 const Container = styled.div`
   text-align: center;
@@ -54,6 +53,7 @@ const LottoNumberDraw: React.FC = () => {
         uniqueRandomNumbers.push(randomNum);
       }
     }
+    uniqueRandomNumbers.sort((a, b) => a - b);
 
     setRecommendedNumbers(uniqueRandomNumbers);
   };
