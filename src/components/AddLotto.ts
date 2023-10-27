@@ -1,12 +1,9 @@
-export {AddLotto};
-
-const axios = require('axios');
-const fs = require('fs');
+import axios from 'axios';
+import fs from 'fs';
 
 const lottoDrawNo = 100; 
 
 const apiUrl = `http://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${lottoDrawNo}`;
-
 
 async function AddLotto() {
   try {
@@ -19,7 +16,7 @@ async function AddLotto() {
     }
 
     const dataToAppend = `export const lottoData = [..., [${winningNumbers.join(', ')}]];\n`; // 기존 데이터에 winningNumbers 추가
-    fs.appendFile('data.ts', dataToAppend,(err: NodeJS.ErrnoException | null) => {
+    fs.appendFile('data.ts', dataToAppend, (err: NodeJS.ErrnoException | null) => {
       if (err) {
         console.error('데이터를 추가하는 중 오류 발생:', err);
       } else {
@@ -31,4 +28,4 @@ async function AddLotto() {
   }
 }
 
-AddLotto();
+export { AddLotto };
