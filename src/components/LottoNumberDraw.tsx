@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { lottoData } from '../data/data';
+import { reducedLottoNumbers } from '../data/data';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -69,7 +69,7 @@ const LottoNumberDraw: React.FC = () => {
   const [recommendedNumbers, setRecommendedNumbers] = useState<number[]>([]);
 
   const generateRandomNumbers = () => {
-    const allNumbers = lottoData.flat();
+    const allNumbers = reducedLottoNumbers.flat();
     const uniqueRandomNumbers: number[] = [];
 
     while (uniqueRandomNumbers.length < 6) {
