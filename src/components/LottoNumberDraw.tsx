@@ -18,6 +18,10 @@ const Title = styled.h1`
   margin-bottom: 50px;
   font-size: 60px;
   font-weight: 700;
+  @media (max-width: 900px) {
+    font-size: 40px;
+    margin-top:100px;
+  }
 `;
 
 const Button = styled.button`
@@ -25,7 +29,8 @@ const Button = styled.button`
   border: none;
   padding: 15px 30px;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 600;
   cursor: pointer;
   margin-bottom: 80px;
   transition: all 0.3s ease; 
@@ -57,6 +62,14 @@ const RecommendedNumber = styled.div`
   margin: 10px;
   font-size: 20px;
   box-shadow:0 10px 10px rgba(0, 0, 0, 0.4); 
+  cursor:pointer;
+  &:hover{
+    background-color: #e3f767;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); 
+  }
+  @media (max-width: 900px) {
+    margin:20px;
+  }
 `;
 
 
