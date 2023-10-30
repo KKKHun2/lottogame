@@ -20,7 +20,7 @@ const Title = styled.h1`
   font-weight: 700;
   @media (max-width: 900px) {
     font-size: 40px;
-    margin-top:100px;
+    margin-top:300px;
   }
 `;
 const UserName = styled.div`
@@ -36,7 +36,7 @@ const Button = styled.button`
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
-  margin-bottom: 80px;
+  margin-bottom: 20px;
   transition: all 0.3s ease; 
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   
