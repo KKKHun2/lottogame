@@ -44,6 +44,15 @@ const Button = styled.button`
     background-color: #a2a2a2;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); 
   }
+  @media (max-width: 900px) {
+    &:hover {
+    background-color: #f5f6fa;
+  }
+     &:focus {
+      background-color: #a2a2a2;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); 
+    }
+}
 `;
 
 
