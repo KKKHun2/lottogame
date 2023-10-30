@@ -81,7 +81,6 @@ const LottoNumberDraw: React.FC = () => {
       }
     }
     uniqueRandomNumbers.sort((a, b) => a - b);
-
     setRecommendedNumbers(uniqueRandomNumbers);
   };
 
