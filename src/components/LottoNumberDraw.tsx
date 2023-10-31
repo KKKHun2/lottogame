@@ -8,7 +8,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
   text-align: center;
-  background-color: #00a8ff;
+  background-color: #939fb1;
   padding: 20px;
   height: 100vh;
   border-radius: 10px;
@@ -70,7 +70,7 @@ const RecommendedNumber = styled.div`
   width: 100px;
   height: 100px;
   background-color: #f5f6fa;
-  border: 2px solid #00a8ff;
+  border: 2px solid #757575;
   border-radius: 50%;
   margin: 10px;
   font-size: 20px;
@@ -133,9 +133,10 @@ const LottoNumberDraw: React.FC = () => {
         ) : (
           <Button onClick={handleNameChange}>이름 입력</Button>
         )}
-        {userName && (
-          <Button onClick={generateRandomNumbers}>번호 추천</Button>
-        )}
+        
+          <Button onClick={generateRandomNumbers}>
+            { recommendedNumbers.length > 0 ? "다시뽑기" : "번호뽑기"}
+          </Button>
         <RecommendedNumbersContainer>
           {recommendedNumbers.map((number, index) => (
             <RecommendedNumber key={index}>
