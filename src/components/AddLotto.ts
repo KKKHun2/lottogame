@@ -3,7 +3,7 @@ export {AddLotto};
 const axios = require('axios');
 const fs = require('fs');
 
-const lottoDrawNo = 100; 
+const lottoDrawNo = 1090
 
 const apiUrl = `http://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${lottoDrawNo}`;
 
