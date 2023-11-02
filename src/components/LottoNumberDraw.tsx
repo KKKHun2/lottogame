@@ -3,13 +3,13 @@ import { reducedLottoNumbers } from '../data/data';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   background-color: #939fb1;
-  padding: 20px;
+  padding: 30px;
   height: 100vh;
   border-radius: 10px;
 `;
@@ -20,14 +20,16 @@ const Title = styled.h1`
   font-weight: 700;
   @media (max-width: 900px) {
     font-size: 40px;
-    margin-top:300px;
+    margin-top: 300px;
   }
 `;
+
 const UserName = styled.div`
-  font-size: 25px;  
+  font-size: 25px;
   font-weight: 500;
-  margin-bottom:50px;
+  margin-bottom: 50px;
 `;
+
 const Button = styled.button`
   background-color: #f5f6fa;
   border: none;
@@ -37,24 +39,14 @@ const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 20px;
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  
-  &:hover {
-    background-color: #a2a2a2;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); 
-  }
-  @media (max-width: 900px) {
-    &:hover {
-    background-color: #f5f6fa;
-  }
-     &:focus {
-      background-color: #a2a2a2;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); 
-    }
-}
-`;
 
+  &:hover, &:active { 
+    background-color: #a2a2a2;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  }
+`;
 
 const RecommendedNumbersContainer = styled.div`
   display: flex;
@@ -74,78 +66,78 @@ const RecommendedNumber = styled.div`
   border-radius: 50%;
   margin: 10px;
   font-size: 20px;
-  box-shadow:0 10px 10px rgba(0, 0, 0, 0.4); 
-  cursor:pointer;
-  &:hover{
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  &:hover { /* 추가된 부분: hover 시 색상 변경 */
     background-color: #e3f767;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); 
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
   }
   @media (max-width: 900px) {
-    margin:20px;
+    margin: 20px;
   }
 `;
 
-
 const LottoN = styled.div`
-    font-size:35px;
-    font-weight: 450;
-`
+  font-size: 35px;
+  font-weight: 450;
+`;
+
 const LottoNumberDraw: React.FC = () => {
-    const [recommendedNumbers, setRecommendedNumbers] = useState<number[]>([]);
-    const [userName, setUserName] = useState<string | null>(null);
-  
-    useEffect(() => {
-      const savedName = localStorage.getItem('userName');
-      if (savedName) {
-        setUserName(savedName);
-      }
-    }, []);
-  
-    const handleNameChange = () => {
-      const inputName = prompt('이름을 입력하세요:');
-      if (inputName) {
-        setUserName(inputName);
-        localStorage.setItem('userName', inputName);
-      }
-    };
-  
-    const generateRandomNumbers = () => {
-      const allNumbers = reducedLottoNumbers.flat();
-      const uniqueRandomNumbers: number[] = [];
-  
-      while (uniqueRandomNumbers.length < 6) {
-        const randomIndex = Math.floor(Math.random() * allNumbers.length);
-        const randomNum = allNumbers[randomIndex];
-  
-        if (!uniqueRandomNumbers.includes(randomNum)) {
-          uniqueRandomNumbers.push(randomNum);
-        }
-      }
-      uniqueRandomNumbers.sort((a, b) => a - b);
-      setRecommendedNumbers(uniqueRandomNumbers);
-    };
-  
-    return (
-      <Container>
-        <Title>로또 번호 추천기</Title>
-        {userName ? (
-          <UserName>안녕하세요, {userName} 님!</UserName>
-        ) : (
-          <Button onClick={handleNameChange}>이름 입력</Button>
-        )}
-        
-          <Button onClick={generateRandomNumbers}>
-            { recommendedNumbers.length > 0 ? "다시뽑기" : "번호뽑기"}
-          </Button>
-        <RecommendedNumbersContainer>
-          {recommendedNumbers.map((number, index) => (
-            <RecommendedNumber key={index}>
-              <LottoN>{number}</LottoN>
-            </RecommendedNumber>
-          ))}
-        </RecommendedNumbersContainer>
-      </Container>
-    );
+  const [recommendedNumbers, setRecommendedNumbers] = useState<number[]>([]);
+  const [userName, setUserName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const savedName = localStorage.getItem('userName');
+    if (savedName) {
+      setUserName(savedName);
+    }
+  }, []);
+
+  const handleNameChange = () => {
+    const inputName = prompt('이름을 입력하세요:');
+    if (inputName) {
+      setUserName(inputName);
+      localStorage.setItem('userName', inputName);
+    }
   };
-  
-  export default LottoNumberDraw;
+
+  const generateRandomNumbers = () => {
+    const allNumbers = reducedLottoNumbers.flat();
+    const uniqueRandomNumbers: number[] = [];
+
+    while (uniqueRandomNumbers.length < 6) {
+      const randomIndex = Math.floor(Math.random() * allNumbers.length);
+      const randomNum = allNumbers[randomIndex];
+
+      if (!uniqueRandomNumbers.includes(randomNum)) {
+        uniqueRandomNumbers.push(randomNum);
+      }
+    }
+    uniqueRandomNumbers.sort((a, b) => a - b);
+    setRecommendedNumbers(uniqueRandomNumbers);
+  };
+
+  return (
+    <Container>
+      <Title>로또 번호 추천기</Title>
+      {userName ? (
+        <UserName>안녕하세요, {userName} 님!</UserName>
+      ) : (
+        <Button onClick={handleNameChange}>이름 입력</Button>
+      )}
+
+      <Button onClick={generateRandomNumbers}>
+        {recommendedNumbers.length > 0 ? "다시뽑기" : "번호뽑기"}
+      </Button>
+      <RecommendedNumbersContainer>
+        {recommendedNumbers.map((number, index) => (
+          <RecommendedNumber key={index}>
+            <LottoN>{number}</LottoN>
+          </RecommendedNumber>
+        ))}
+      </RecommendedNumbersContainer>
+    </Container>
+  );
+};
+
+export default LottoNumberDraw;
