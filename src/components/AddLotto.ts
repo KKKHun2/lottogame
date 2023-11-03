@@ -37,5 +37,5 @@ async function AddLotto(drawNo: number) {
     console.error('API 호출 중 오류 발생:', error);
   }
 }
-setInterval(checkAndAddLotto, 60 * 60 * 1000);
+setInterval(checkAndAddLotto, 60 * 60 * 10000);
 checkAndAddLotto();
