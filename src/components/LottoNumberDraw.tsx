@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { reducedLottoNumbers } from '../data/data';
+import React from 'react';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import { recommendedNumbersState, userNameState } from '../atoms/atoms';
+import { lottoNumbersState } from '../data/data'; 
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -68,7 +70,7 @@ const RecommendedNumber = styled.div`
   font-size: 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
   cursor: pointer;
-  &:hover { /* 추가된 부분: hover 시 색상 변경 */
+  &:hover {
     background-color: #e3f767;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
   }
@@ -81,28 +83,14 @@ const LottoN = styled.div`
   font-size: 35px;
   font-weight: 450;
 `;
-
 const LottoNumberDraw: React.FC = () => {
-  const [recommendedNumbers, setRecommendedNumbers] = useState<number[]>([]);
-  const [userName, setUserName] = useState<string | null>(null);
-
-  useEffect(() => {
-    const savedName = localStorage.getItem('userName');
-    if (savedName) {
-      setUserName(savedName);
-    }
-  }, []);
-
-  const handleNameChange = () => {
-    const inputName = prompt('이름을 입력하세요:');
-    if (inputName) {
-      setUserName(inputName);
-      localStorage.setItem('userName', inputName);
-    }
-  };
+  const [userName, setUserName] = useRecoilState(userNameState);
+  const recommendedNumbers = useRecoilValue(recommendedNumbersState);
+  const setNewUserName = useSetRecoilState(userNameState);
+  const lottoNumbers = useRecoilValue(lottoNumbersState);
 
   const generateRandomNumbers = () => {
-    const allNumbers = reducedLottoNumbers.flat();
+    const allNumbers = lottoNumbers.flat();
     const uniqueRandomNumbers: number[] = [];
 
     while (uniqueRandomNumbers.length < 6) {
@@ -114,7 +102,17 @@ const LottoNumberDraw: React.FC = () => {
       }
     }
     uniqueRandomNumbers.sort((a, b) => a - b);
+
+    const [, setRecommendedNumbers] = useRecoilState(recommendedNumbersState);
     setRecommendedNumbers(uniqueRandomNumbers);
+  };
+
+  const handleNameChange = () => {
+    const inputName = prompt('이름을 입력하세요:');
+    if (inputName) {
+      setNewUserName(inputName);
+      localStorage.setItem('userName', inputName);
+    }
   };
 
   return (
@@ -125,7 +123,6 @@ const LottoNumberDraw: React.FC = () => {
       ) : (
         <Button onClick={handleNameChange}>이름 입력</Button>
       )}
-
       <Button onClick={generateRandomNumbers}>
         {recommendedNumbers.length > 0 ? "다시뽑기" : "번호뽑기"}
       </Button>
@@ -139,5 +136,4 @@ const LottoNumberDraw: React.FC = () => {
     </Container>
   );
 };
-
 export default LottoNumberDraw;
