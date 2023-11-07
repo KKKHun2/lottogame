@@ -1,14 +1,14 @@
 import React from 'react';
 import LottoNumberDraw from './components/LottoNumberDraw';
-// import { AddLotto } from './components/AddLotto';
-
+import { RecoilRoot } from 'recoil';
 
 function App() {
-  // AddLotto()
+
+
   return (
-    <div className="App">
+    <RecoilRoot>
       <LottoNumberDraw />
-    </div>
+    </RecoilRoot>
   );
 }
 
