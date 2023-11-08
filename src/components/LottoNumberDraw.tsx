@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { recommendedNumbersState, userNameState,lottoNumbersState } from '../atoms/atoms';
 import styled from 'styled-components';
@@ -82,34 +82,12 @@ const LottoN = styled.div`
   font-size: 35px;
   font-weight: 450;
 `;
-
-const GenerateRandomNumbers = () => {
-  const lottoNumbers = useRecoilValue(lottoNumbersState);
-  const allNumbers = lottoNumbers.flat();
-  const uniqueRandomNumbers: number[] = [];
-
-  while (uniqueRandomNumbers.length < 6) {
-    const randomIndex = Math.floor(Math.random() * allNumbers.length);
-    const randomNum = allNumbers[randomIndex];
-
-    if (!uniqueRandomNumbers.includes(randomNum)) {
-      uniqueRandomNumbers.push(randomNum);
-    }
-  }
-  uniqueRandomNumbers.sort((a, b) => a - b);
-
-  const setRecommendedNumbers = useSetRecoilState(recommendedNumbersState);
-  setRecommendedNumbers(uniqueRandomNumbers);
-};
-
-
 const LottoNumberDraw: React.FC = () => {
-  const [userName, setUserName] = useRecoilState(userNameState);
+  const [userName,] = useRecoilState(userNameState);
   const recommendedNumbers = useRecoilValue(recommendedNumbersState);
   const setNewUserName = useSetRecoilState(userNameState);
-
-
-  
+  const lottoNumbers = useRecoilValue(lottoNumbersState);
+  const [generatedNumbers, setGeneratedNumbers] = useState<number[]>([]); 
 
   const handleNameChange = () => {
     const inputName = prompt('이름을 입력해주세요:');
@@ -117,6 +95,23 @@ const LottoNumberDraw: React.FC = () => {
       setNewUserName(inputName);
       localStorage.setItem('userName', inputName);
     }
+  };
+
+  const generateRandomNumbers = () => {
+    const allNumbers = lottoNumbers.flat();
+    const uniqueRandomNumbers: number[] = [];
+
+    while (uniqueRandomNumbers.length < 6) {
+      const randomIndex = Math.floor(Math.random() * allNumbers.length);
+      const randomNum = allNumbers[randomIndex];
+
+      if (!uniqueRandomNumbers.includes(randomNum)) {
+        uniqueRandomNumbers.push(randomNum);
+      }
+    }
+    uniqueRandomNumbers.sort((a, b) => a - b);
+
+    setGeneratedNumbers(uniqueRandomNumbers); // 생성된 번호를 상태에 저장
   };
 
   return (
@@ -127,11 +122,11 @@ const LottoNumberDraw: React.FC = () => {
       ) : (
         <Button onClick={handleNameChange}>이름 입력</Button>
       )}
-      <Button onClick={GenerateRandomNumbers}>
-        {recommendedNumbers.length > 0 ? "다시뽑기" : "번호뽑기"}
+      <Button onClick={generateRandomNumbers}>
+        {generatedNumbers.length > 0 ? "다시뽑기" : "번호뽑기"}
       </Button>
       <RecommendedNumbersContainer>
-        {recommendedNumbers.map((number, index) => (
+        {generatedNumbers.map((number, index) => (
           <RecommendedNumber key={index}>
             <LottoN>{number}</LottoN>
           </RecommendedNumber>
