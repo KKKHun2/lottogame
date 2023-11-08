@@ -582,7 +582,7 @@
 
 //   ];
 //   export const reducedLottoNumbers = lottoData.map(numbers => numbers.slice(0, 7));
-import { atom, useRecoilState } from 'recoil';
+import {atom} from 'recoil';
 
 export const userNameState = atom<string | null>({
   key: 'userNameState',
@@ -1186,14 +1186,3 @@ export const lottoNumbersState = atom<TLottoNum>({
     [15, 18, 21, 32, 35, 44, 6]
   ],
 });
-
-// 컴포넌트에서 상태 읽고 쓰기
-function LottoNumbers() {
-  const [lottoNumbers, setLottoNumbers] = useRecoilState(lottoNumbersState);
-  const flatLottoNumbers = lottoNumbers.flat();
-
-  return flatLottoNumbers;
-  
-}
-
-export default LottoNumbers;
