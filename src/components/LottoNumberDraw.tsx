@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
-import { recommendedNumbersState, userNameState,lottoNumbersState } from '../atoms/atoms';
+import {userNameState,lottoNumbersState } from '../atoms/atoms';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -84,7 +84,6 @@ const LottoN = styled.div`
 `;
 const LottoNumberDraw: React.FC = () => {
   const [userName,] = useRecoilState(userNameState);
-  const recommendedNumbers = useRecoilValue(recommendedNumbersState);
   const setNewUserName = useSetRecoilState(userNameState);
   const lottoNumbers = useRecoilValue(lottoNumbersState);
   const [generatedNumbers, setGeneratedNumbers] = useState<number[]>([]); 
@@ -111,7 +110,7 @@ const LottoNumberDraw: React.FC = () => {
     }
     uniqueRandomNumbers.sort((a, b) => a - b);
 
-    setGeneratedNumbers(uniqueRandomNumbers); // 생성된 번호를 상태에 저장
+    setGeneratedNumbers(uniqueRandomNumbers); 
   };
 
   return (

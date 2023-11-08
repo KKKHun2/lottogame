@@ -58,9 +58,9 @@ const LottoDataUpdater = () => {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  },);
 
-  return null; // 이 컴포넌트는 렌더링되지 않아야 합니다.
+  return null; 
 };
 
 export default LottoDataUpdater;
