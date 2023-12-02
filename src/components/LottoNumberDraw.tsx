@@ -21,7 +21,7 @@ const Title = styled.h1`
   font-weight: 700;
   @media (max-width: 900px) {
     font-size: 40px;
-    margin-top: 300px;
+    margin-top: 200px;
   }
 `;
 
@@ -115,7 +115,7 @@ const LottoNumberDraw: React.FC = () => {
 
   return (
     <Container>
-      <Title>로또 번호 추천기</Title>
+      <Title>로또 번호 추천!</Title>
       {userName ? (
         <UserName>안녕하세요, {userName} 님!</UserName>
       ) : (

@@ -20,7 +20,7 @@ async function checkAndAddLotto(
   }
 }
 
-async function AddLotto(
+export  async function AddLotto(
   drawNo: number,
   lottoData: number[][],
   setLottoData: (data: number[][]) => void,
