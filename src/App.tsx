@@ -9,7 +9,6 @@ function App() {
   return (
     <RecoilRoot>
       <LottoNumberDraw />
-      <LottoDataUpdater />
     </RecoilRoot>
   );
 }

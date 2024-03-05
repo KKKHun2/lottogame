@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import {userNameState,lottoNumbersState } from '../atoms/atoms';
 import styled from 'styled-components';
+import LottoDataUpdater from './AddLotto';
 
 const Container = styled.div`
   display: flex;
@@ -77,7 +78,14 @@ const RecommendedNumber = styled.div`
     margin: 20px;
   }
 `;
-
+const TilteBox =styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap:2rem;
+  margin-bottom: 2rem;
+`
 const LottoN = styled.div`
   font-size: 35px;
   font-weight: 450;
@@ -115,7 +123,11 @@ const LottoNumberDraw: React.FC = () => {
 
   return (
     <Container>
-      <Title>로또 번호 추천!</Title>
+      <TilteBox>
+        <Title>로또 번호 추천!</Title>
+        <LottoDataUpdater />
+      </TilteBox>
+     
       {userName ? (
         <UserName>안녕하세요, {userName} 님!</UserName>
       ) : (
