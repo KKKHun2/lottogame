@@ -59,6 +59,7 @@ async function AddLotto(
   const lottoDataResponse = response.data;
   console.log(lottoDataResponse)
 
+
   // 에러 처리
   if (!lottoDataResponse) {
     throw new Error(`로또 데이터를 가져오지 못했습니다. (회차: ${drawNo})`);
