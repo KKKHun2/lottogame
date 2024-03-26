@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil'; 
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { lottoDataState, lottoNumbersState } from '../atoms/atoms';
 
@@ -17,7 +17,7 @@ const Button = styled.button`
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 
-  &:hover, &:active { 
+  &:hover, &:active {
     background-color: #a2a2a2;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
   }
@@ -25,7 +25,7 @@ const Button = styled.button`
 
   const LottoDataUpdater = () => {
   const [lottoData, setLottoData] = useRecoilState(lottoDataState);
-  const setLottoNumbers = useSetRecoilState(lottoNumbersState); 
+  const setLottoNumbers = useSetRecoilState(lottoNumbersState);
   const [startDrawNo, setStartDrawNo] = useState(1108); // 초기 회차 설정
 
   const handleAddLotto = async () => {
@@ -72,14 +72,20 @@ console.log(lottoDataResponse)
   }
 
   const winningNumbers = [];
-  for (let i = 1; i <= 6; i++) {
-    winningNumbers.push(lottoDataResponse[`drwtNo${i}`]);
-  }
+  if(lottoDataResponse){
+    winningNumbers.push(lottoDataResponse.drwtNo1);
+    winningNumbers.push(lottoDataResponse.drwtNo2);
+    winningNumbers.push(lottoDataResponse.drwtNo3);
+    winningNumbers.push(lottoDataResponse.drwtNo4);
+    winningNumbers.push(lottoDataResponse.drwtNo5);
+    winningNumbers.push(lottoDataResponse.drwtNo6);
+    winningNumbers.push(lottoDataResponse.bnusNo);
+}
 
   const newLottoData = [...lottoData, winningNumbers];
 
   setLottoData(newLottoData);
-  setLottoNumbers(newLottoData); 
+  setLottoNumbers(newLottoData);
 
   console.log(`로또 번호 데이터가 추가되었습니다. (회차: ${drawNo})`);
 }
