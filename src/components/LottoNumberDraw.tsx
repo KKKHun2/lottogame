@@ -14,15 +14,17 @@ const Container = styled.div`
   padding: 30px;
   height: 100vh;
   border-radius: 10px;
+  @media (max-width: 900px) {
+    height: 100%;
+  }
 `;
 
 const Title = styled.h1`
-  margin-bottom: 20px;
-  font-size: 60px;
+  margin: 20px 0 20px 0;
+  font-size: 70px;
   font-weight: 700;
   @media (max-width: 900px) {
     font-size: 40px;
-    margin-top: 200px;
   }
 `;
 
@@ -30,6 +32,9 @@ const UserName = styled.div`
   font-size: 25px;
   font-weight: 500;
   margin-bottom: 50px;
+  @media (max-width: 900px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const Button = styled.button`
@@ -44,7 +49,7 @@ const Button = styled.button`
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 
-  &:hover, &:active { 
+  &:hover, &:active {
     background-color: #a2a2a2;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
   }
@@ -94,7 +99,7 @@ const LottoNumberDraw: React.FC = () => {
   const [userName,] = useRecoilState(userNameState);
   const setNewUserName = useSetRecoilState(userNameState);
   const lottoNumbers = useRecoilValue(lottoNumbersState);
-  const [generatedNumbers, setGeneratedNumbers] = useState<number[]>([]); 
+  const [generatedNumbers, setGeneratedNumbers] = useState<number[]>([]);
 
   const handleNameChange = () => {
     const inputName = prompt('이름을 입력해주세요:');
@@ -118,16 +123,16 @@ const LottoNumberDraw: React.FC = () => {
     }
     uniqueRandomNumbers.sort((a, b) => a - b);
 
-    setGeneratedNumbers(uniqueRandomNumbers); 
+    setGeneratedNumbers(uniqueRandomNumbers);
   };
 
   return (
     <Container>
       <TilteBox>
-        <Title>로또 번호 추천!</Title>
+        <Title>당신의 로또 번호!!</Title>
         <LottoDataUpdater />
       </TilteBox>
-     
+
       {userName ? (
         <UserName>안녕하세요, {userName} 님!</UserName>
       ) : (
